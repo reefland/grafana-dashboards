@@ -1,4 +1,4 @@
-# SMARTctl Exporter Dashboard
+# VolSync Dashboard
 
 Provides a basic dashboard for VolSync. See Project <https://github.com/backube/volsync>.
 
