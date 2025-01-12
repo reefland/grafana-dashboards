@@ -4,6 +4,7 @@ This repository contains a set of [Grafana](https://github.com/grafana/grafana) 
 
 ## Dashboards
 
-| Dashboard             | Description                     | Grafana ID | Screenshot |
-|:---                   |:---                             |:----------:|:----------:|
-|[smartctl-exporter](./smartctl-exporter/) | Dashboard for Prometheus SMARTctl Exporter | 22604       |[LINK](./smartctl-exporter/smartctl-exporter.png) |
+| Dashboard             | Description                     | Grafana ID |
+|:---                   |:---                             |:----------:|
+|[smartctl-exporter](./smartctl-exporter/) | Dashboard for Prometheus SMARTctl Exporter | [22604](https://grafana.com/grafana/dashboards/22604-smartctl-exporter-dashboard/) |
+|[volsync](./volsync/) | Dashboard for Kubernetes VolSync | [21356](https://grafana.com/grafana/dashboards/21356-volsync-dashboard/)|
