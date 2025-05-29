@@ -433,7 +433,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(rate(vernemq_mqtt_publish_received{pod=~\"$POD\"}[30s]))",
+          "expr": "sum(rate(vernemq_mqtt_publish_received{pod=~\"$POD\"}[$__rate_interval]))",
           "format": "table",
           "hide": false,
           "instant": false,
@@ -1061,7 +1061,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(vernemq_mqtt_publish_sent{pod=~\"$POD\"}[30s]))",
+          "expr": "sum(rate(vernemq_mqtt_publish_sent{pod=~\"$POD\"}[$__rate_interval]))",
           "intervalFactor": 2,
           "metric": "mqtt_publish_sent",
           "range": true,
@@ -1259,7 +1259,7 @@
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum(rate(vernemq_socket_open{pod=~\"$POD\"}[30s]))",
+              "expr": "sum(rate(vernemq_socket_open{pod=~\"$POD\"}[$__rate_interval]))",
               "instant": false,
               "intervalFactor": 2,
               "legendFormat": "Connect (Socket Open) - $POD",
@@ -1274,7 +1274,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "sum(rate(vernemq_socket_close{pod=~\"$POD\"}[30s]))",
+              "expr": "sum(rate(vernemq_socket_close{pod=~\"$POD\"}[$__rate_interval]))",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "Disconnect (Socket Close) - $POD",
@@ -1490,7 +1490,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_queue_setup{pod=~\"$POD\"}[60s])",
+              "expr": "rate(vernemq_queue_setup{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Queue Setup: {{pod}}",
               "metric": "queue_setup",
@@ -1504,7 +1504,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_queue_teardown{pod=~\"$POD\"}[60s])",
+              "expr": "rate(vernemq_queue_teardown{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Queue Teardown: {{pod}}",
               "metric": "queue_teardown",
@@ -1581,7 +1581,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 168
+            "y": 24
           },
           "id": 16,
           "options": {
@@ -1612,7 +1612,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_queue_message_in{pod=~\"$POD\"}[1m]) >0",
+              "expr": "rate(vernemq_queue_message_in{pod=~\"$POD\"}[$__rate_interval]) >0",
               "intervalFactor": 2,
               "legendFormat": "In: {{pod}}",
               "metric": "queue_message_in",
@@ -1626,7 +1626,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_queue_message_out{pod=~\"$POD\"}[1m]) >0",
+              "expr": "rate(vernemq_queue_message_out{pod=~\"$POD\"}[$__rate_interval]) >0",
               "intervalFactor": 2,
               "legendFormat": "Out: {{pod}}",
               "metric": "queue_message_out",
@@ -1640,7 +1640,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_queue_message_drop{pod=~\"$POD\"}[1m]) >0",
+              "expr": "rate(vernemq_queue_message_drop{pod=~\"$POD\"}[$__rate_interval]) >0",
               "intervalFactor": 2,
               "legendFormat": "Dropped: {{pod}}",
               "metric": "queue_message_drop",
@@ -2091,7 +2091,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(vernemq_system_reductions{pod=~\"$POD\"}[30s])",
+          "expr": "rate(vernemq_system_reductions{pod=~\"$POD\"}[$__rate_interval])",
           "intervalFactor": 2,
           "legendFormat": "System Reductions: {{pod}}",
           "metric": "system_reductions",
@@ -2272,7 +2272,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(vernemq_system_context_switches{pod=~\"$POD\"}[30s])",
+          "expr": "rate(vernemq_system_context_switches{pod=~\"$POD\"}[$__rate_interval])",
           "intervalFactor": 2,
           "legendFormat": "Erlang Context Switches: {{pod}}",
           "metric": "system_context_switches",
@@ -2373,7 +2373,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(vernemq_system_io_in{pod=~\"$POD\"}[30s])",
+          "expr": "rate(vernemq_system_io_in{pod=~\"$POD\"}[$__rate_interval])",
           "intervalFactor": 2,
           "legendFormat": "System IO IN: {{pod}}",
           "metric": "system_io_in",
@@ -2387,7 +2387,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(vernemq_system_io_out{pod=~\"$POD\"}[30s])",
+          "expr": "rate(vernemq_system_io_out{pod=~\"$POD\"}[$__rate_interval])",
           "intervalFactor": 2,
           "legendFormat": "System IO OUT: {{pod}}",
           "metric": "system_io_out",
@@ -2587,7 +2587,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(vernemq_system_gc_count{pod=~\"$POD\"}[30s])",
+          "expr": "rate(vernemq_system_gc_count{pod=~\"$POD\"}[$__rate_interval])",
           "intervalFactor": 2,
           "legendFormat": "Erlang GC Count: {{pod}}",
           "metric": "system_gc_count",
@@ -2686,7 +2686,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(vernemq_system_words_reclaimed_by_gc{pod=~\"$POD\"}[30s])",
+          "expr": "rate(vernemq_system_words_reclaimed_by_gc{pod=~\"$POD\"}[$__rate_interval])",
           "intervalFactor": 2,
           "legendFormat": "Erlang GC Words Reclaimed: {{pod}}",
           "metric": "system_words_reclaimed_by_gc",
@@ -2772,7 +2772,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 435
+            "y": 47
           },
           "id": 14,
           "options": {
@@ -2797,7 +2797,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_bytes_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_bytes_received{pod=~\"$POD\"}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -2876,7 +2876,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 435
+            "y": 47
           },
           "id": 15,
           "options": {
@@ -2901,7 +2901,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_bytes_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_bytes_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Bytes Sent: {{pod}}",
               "metric": "bytes_sent",
@@ -2991,7 +2991,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 436
+            "y": 48
           },
           "id": 18,
           "options": {
@@ -3091,7 +3091,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 436
+            "y": 48
           },
           "id": 19,
           "options": {
@@ -3205,7 +3205,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 437
+            "y": 49
           },
           "id": 29,
           "options": {
@@ -3230,7 +3230,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_socket_open{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_socket_open{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Socket Open : {{pod}}",
               "metric": "socket_open",
@@ -3244,7 +3244,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_socket_close{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_socket_close{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Socket Close : {{pod}}",
               "metric": "socket_close",
@@ -3258,7 +3258,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_socket_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_socket_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Socket Error : {{pod}}",
               "metric": "socket_error",
@@ -3349,7 +3349,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 438
+            "y": 50
           },
           "id": 31,
           "options": {
@@ -3374,7 +3374,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_cluster_bytes_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_cluster_bytes_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Bytes Sent: {{pod}}",
               "metric": "cluster_bytes_sent",
@@ -3388,7 +3388,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_cluster_bytes_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_cluster_bytes_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Bytes Received: {{pod}}",
               "metric": "cluster_bytes_received",
@@ -3402,7 +3402,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_cluster_bytes_dropped{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_cluster_bytes_dropped{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Bytes Dropped: {{pod}}",
               "metric": "cluster_bytes_dropped",
@@ -3491,7 +3491,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 439
+            "y": 51
           },
           "id": 32,
           "options": {
@@ -3516,7 +3516,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_connack_bad_credentials_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_connack_bad_credentials_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Connack Bad Credentials: {{pod}}",
               "metric": "mqtt_connack_bad_credentials_sent",
@@ -3530,7 +3530,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_connack_identifier_rejected_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_connack_identifier_rejected_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Connack ID rejected: {{pod}}",
               "metric": "mqtt_connack_identifier_rejected_sent",
@@ -3544,7 +3544,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_connack_not_authorized_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_connack_not_authorized_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Connack Not Authorized: {{pod}}",
               "metric": "mqtt_connack_not_authorized_sent",
@@ -3558,7 +3558,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_connack_server_unavailable_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_connack_server_unavailable_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Connack Server Unavailable: {{pod}}",
               "metric": "mqtt_connack_server_unavailable_sent",
@@ -3572,7 +3572,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_connack_unacceptable_protocol_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_connack_unacceptable_protocol_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Connack Unacceptable Protocol: {{pod}}",
               "metric": "mqtt_connack_unacceptable_protocol_sent",
@@ -3647,7 +3647,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 439
+            "y": 51
           },
           "id": 36,
           "options": {
@@ -3672,7 +3672,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_connect_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_connect_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "MQTT CONNECT Received: {{pod}}",
               "metric": "mqtt_connect_received",
@@ -3686,7 +3686,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_connack_accepted_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_connack_accepted_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "MQTT CONNACK sent: {{pod}}",
               "metric": "mqtt_connack_accepted_sent",
@@ -3775,7 +3775,7 @@
             "h": 11,
             "w": 12,
             "x": 0,
-            "y": 440
+            "y": 52
           },
           "id": 34,
           "options": {
@@ -3800,7 +3800,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_subscribe_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_subscribe_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Subscribe Received: {{pod}}",
               "metric": "mqtt_subscribe_received",
@@ -3814,7 +3814,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_suback_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_suback_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "SUBACK sent: {{pod}}",
               "metric": "mqtt_suback_sent",
@@ -3889,7 +3889,7 @@
             "h": 11,
             "w": 12,
             "x": 12,
-            "y": 440
+            "y": 52
           },
           "id": 35,
           "options": {
@@ -3914,7 +3914,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_unsubscribe_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_unsubscribe_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Unsubscribe Received: {{pod}}",
               "metric": "mqtt_unsubscribe_received",
@@ -3928,7 +3928,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_unsuback_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_unsuback_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "UNSUBACK sent: {{pod}}",
               "metric": "mqtt_unsuback_sent",
@@ -4003,7 +4003,7 @@
             "h": 11,
             "w": 12,
             "x": 0,
-            "y": 519
+            "y": 118
           },
           "id": 65,
           "options": {
@@ -4028,7 +4028,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_subscribe_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_subscribe_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Subscribe Error: {{pod}}",
               "metric": "mqtt_subscribe_error",
@@ -4042,7 +4042,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_subscribe_auth_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_subscribe_auth_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Subscribe Auth Error: {{pod}}",
               "metric": "mqtt_subscribe_auth_error",
@@ -4117,7 +4117,7 @@
             "h": 11,
             "w": 12,
             "x": 12,
-            "y": 519
+            "y": 118
           },
           "id": 66,
           "options": {
@@ -4142,7 +4142,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_unsubscribe_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_unsubscribe_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Unsubscribe Error: {{pod}}",
               "metric": "mqtt_unsubscribe_error",
@@ -4231,7 +4231,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 441
+            "y": 53
           },
           "id": 37,
           "options": {
@@ -4256,7 +4256,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_publish_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_publish_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBLISH Received: {{pod}}",
               "metric": "mqtt_publish_received",
@@ -4270,7 +4270,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_publish_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_publish_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBLISH Sent: {{pod}}",
               "metric": "mqtt_publish_sent",
@@ -4284,7 +4284,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_publish_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_publish_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBLISH Error: {{pod}}",
               "metric": "mqtt_publish_error",
@@ -4373,7 +4373,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 464
+            "y": 76
           },
           "id": 41,
           "options": {
@@ -4398,7 +4398,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_puback_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_puback_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBACK Received: {{pod}}",
               "metric": "mqtt_puback_received",
@@ -4412,7 +4412,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_puback_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_puback_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBACK Sent: {{pod}}",
               "metric": "mqtt_puback_sent",
@@ -4426,7 +4426,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_puback_invalid_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_puback_invalid_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBACK Invalid: {{pod}}",
               "metric": "mqtt_puback_invalid_error",
@@ -4501,7 +4501,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 464
+            "y": 76
           },
           "id": 38,
           "options": {
@@ -4526,7 +4526,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubrec_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubrec_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBREC Received: {{pod}}",
               "metric": "mqtt_pubrec_received",
@@ -4540,7 +4540,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubrec_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubrec_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBREC Sent: {{pod}}",
               "metric": "mqtt_pubrec_sent",
@@ -4554,7 +4554,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubrec_invalid_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubrec_invalid_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBREC Invalid: {{pod}}",
               "metric": "mqtt_pubrec_invalid_error",
@@ -4629,7 +4629,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 473
+            "y": 85
           },
           "id": 39,
           "options": {
@@ -4654,7 +4654,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubrel_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubrel_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBREL Received: {{pod}}",
               "metric": "mqtt_pubrel_received",
@@ -4668,7 +4668,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubrel_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubrel_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBREL Sent: {{pod}}",
               "metric": "mqtt_pubrel_sent",
@@ -4743,7 +4743,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 473
+            "y": 85
           },
           "id": 40,
           "options": {
@@ -4768,7 +4768,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubcomp_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubcomp_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBCOMP Received: {{pod}}",
               "metric": "mqtt_pubcomp_received",
@@ -4782,7 +4782,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubcomp_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubcomp_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBCOMP Sent: {{pod}}",
               "metric": "mqtt_pubcomp_sent",
@@ -4796,7 +4796,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pubcomp_invalid_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pubcomp_invalid_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PUBCOMP Invalid: {{pod}}",
               "metric": "mqtt_pubcomp_invalid_error",
@@ -4886,7 +4886,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 442
+            "y": 54
           },
           "id": 42,
           "options": {
@@ -4911,7 +4911,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pingreq_received{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pingreq_received{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PINGREQ Received: {{pod}}",
               "metric": "mqtt_pingreq_received",
@@ -4925,7 +4925,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_pingresp_sent{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_pingresp_sent{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "PINGRESP Sent: {{pod}}",
               "metric": "mqtt_pingresp_sent",
@@ -5014,7 +5014,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 443
+            "y": 55
           },
           "id": 43,
           "options": {
@@ -5114,7 +5114,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 443
+            "y": 55
           },
           "id": 44,
           "options": {
@@ -5139,7 +5139,7 @@
                 "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
-              "expr": "rate(vernemq_mqtt_invalid_msg_size_error{pod=~\"$POD\"}[30s])",
+              "expr": "rate(vernemq_mqtt_invalid_msg_size_error{pod=~\"$POD\"}[$__rate_interval])",
               "intervalFactor": 2,
               "legendFormat": "Invalid Message Size Error: {{pod}}",
               "metric": "mqtt_invalid_msg_size_error",
@@ -5156,7 +5156,7 @@
       "type": "row"
     }
   ],
-  "refresh": "5s",
+  "refresh": "10s",
   "schemaVersion": 41,
   "tags": [
     "MQTT"
@@ -5201,8 +5201,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "VerneMQ Cluster",
-  "uid": "1d03b3c8-dc3f-4afd-baeb-9ee25ef7bf06",
-  "version": 1,
+  "title": "VerneMQ Cluster TEST",
+  "uid": "3c34b3bf-ea54-4ba4-bd4d-c1fe546a5916",
+  "version": 2,
   "weekStart": ""
 }
