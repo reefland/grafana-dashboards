@@ -12,22 +12,10 @@
   "__elements": {},
   "__requires": [
     {
-      "type": "panel",
-      "id": "gauge",
-      "name": "Gauge",
-      "version": ""
-    },
-    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
       "version": "11.4.0"
-    },
-    {
-      "type": "panel",
-      "id": "piechart",
-      "name": "Pie chart",
-      "version": ""
     },
     {
       "type": "datasource",
@@ -37,20 +25,26 @@
     },
     {
       "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    },
+    {
+      "type": "panel",
       "id": "stat",
       "name": "Stat",
       "version": ""
     },
     {
       "type": "panel",
-      "id": "table",
-      "name": "Table",
+      "id": "piechart",
+      "name": "Pie chart",
       "version": ""
     },
     {
       "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
+      "id": "table",
+      "name": "Table",
       "version": ""
     }
   ],
@@ -73,8 +67,8 @@
   "description": "Extended smartctl-exporter Dashboard",
   "editable": true,
   "fiscalYearStartMonth": 0,
+  "gnetId": 22604,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
@@ -128,8 +122,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -172,7 +165,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg(smartctl_device_temperature{instance=~\"$node\", device=~\"$disk\"} * on(instance, device) group_left(interface,serial_number,model_name) smartctl_device{interface=~\"$type\",serial_number=~\"$serial_number\",model_name=~\"$device_model\"}) by (instance,device,model_name)",
+          "expr": "avg(smartctl_device_temperature{instance=~\"$node\", device=~\"$disk\", temperature_type=~\"current|\"} * on(instance, device) group_left(interface,serial_number,model_name) smartctl_device{interface=~\"$type\",serial_number=~\"$serial_number\",model_name=~\"$device_model\"}) by (instance,device,model_name)",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -200,8 +193,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -292,7 +284,7 @@
                 "id": "custom.hideFrom",
                 "value": {
                   "legend": false,
-                  "tooltip": false,
+                  "tooltip": true,
                   "viz": true
                 }
               }
@@ -358,6 +350,7 @@
           }
         }
       ],
+      "title": "",
       "type": "piechart"
     },
     {
@@ -409,8 +402,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -483,8 +475,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -598,8 +589,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -688,8 +678,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -770,8 +759,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -1039,8 +1027,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -1323,9 +1310,41 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
-          "displayName": "",
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Wear Level %",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
           "mappings": [],
           "max": 100,
           "min": 0,
@@ -1333,8 +1352,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -1352,25 +1370,27 @@
       },
       "gridPos": {
         "h": 11,
-        "w": 13,
+        "w": 24,
         "x": 0,
         "y": 18
       },
-      "id": 8,
+      "id": 20,
       "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
+        "legend": {
           "calcs": [
-            "last"
+            "lastNotNull",
+            "max"
           ],
-          "fields": "",
-          "values": false
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -1380,98 +1400,37 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sort_desc(100 - smartctl_device_attribute{instance=~\"$node\", device=~\"$disk\", attribute_name=\"Wear_Leveling_Count\",attribute_value_type=\"value\"} * on(instance, device) group_left(interface,serial_number,model_family,model_name) smartctl_device{interface=~\"sat\",serial_number=~\"$serial_number\",model_name=~\"$device_model\"})",
+          "expr": "max(100 - smartctl_device_attribute{instance=~\"$node\", device=~\"$disk\", attribute_name=\"Wear_Leveling_Count\", attribute_value_type=\"value\"} * on(instance, device) group_left(interface,serial_number,model_family,model_name) smartctl_device{interface=~\"sat\",serial_number=~\"$serial_number\",model_name=~\"$device_model\"}) by (instance, device, interface, model_name)",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}:{{device}}",
+          "legendFormat": "{{instance}}:{{device}} ({{interface}}):{{model_name}}",
+          "range": true,
           "refId": "A"
-        }
-      ],
-      "title": "Wear Level on SATA Devices",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "displayName": "",
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 75
-              },
-              {
-                "color": "red",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percent"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 11,
-        "w": 11,
-        "x": 13,
-        "y": 18
-      },
-      "id": 14,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "last"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.4.0",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sort_desc(smartctl_device_percentage_used{instance=~\"$node\", device=~\"$disk\"} * on(instance, device) group_left(interface,serial_number,model_family,model_name) smartctl_device{interface=~\"nvme\",serial_number=~\"$serial_number\",model_name=~\"$device_model\"})\n",
+          "expr": "max(smartctl_device_percentage_used{instance=~\"$node\", device=~\"$disk\"} * on(instance, device) group_left(interface,serial_number,model_family,model_name) smartctl_device{interface=~\"nvme\",serial_number=~\"$serial_number\",model_name=~\"$device_model\"}) by (instance, device, interface, model_name)",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}:{{device}}",
-          "refId": "A"
+          "legendFormat": "{{instance}}:{{device}} ({{interface}}):{{model_name}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Wear Level on NVMe Devices",
-      "type": "gauge"
+      "title": "Wear Leveling Over Time",
+      "type": "timeseries"
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": [
     "prometheus",
     "node_exporter",
@@ -1587,7 +1546,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -1604,6 +1563,5 @@
   "timezone": "browser",
   "title": "SMARTctl Exporter Dashboard",
   "uid": "ce8j0dmrrej9cc",
-  "version": 47,
   "weekStart": ""
 }
